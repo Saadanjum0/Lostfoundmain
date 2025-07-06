@@ -1,0 +1,116 @@
+/* Mobile Color Fix - Add this to ensure colors work on all mobile devices */
+
+/* Force color rendering and prevent mobile-specific color issues */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-rendering: optimizeQuality;
+}
+
+/* Ensure gradients work on all mobile browsers */
+.bg-gradient-to-r,
+.bg-gradient-to-br,
+.bg-gradient-to-bl,
+.bg-clip-text {
+  background-attachment: scroll !important;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Mobile-specific gradient fallbacks */
+@supports not (background-clip: text) {
+  .bg-gradient-to-r.from-amber-400.to-orange-500,
+  .bg-gradient-to-r.from-amber-600.to-orange-600 {
+    background: #f59e0b !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    color: #f59e0b !important;
+  }
+}
+
+/* Force color values for mobile */
+@media (max-width: 768px) {
+  /* Ensure background colors work */
+  .bg-white { background-color: #ffffff !important; }
+  .bg-gray-50 { background-color: #f9fafb !important; }
+  .bg-gray-100 { background-color: #f3f4f6 !important; }
+  .bg-gray-900 { background-color: #111827 !important; }
+  
+  /* Ensure text colors work */
+  .text-white { color: #ffffff !important; }
+  .text-gray-600 { color: #4b5563 !important; }
+  .text-gray-700 { color: #374151 !important; }
+  .text-gray-900 { color: #111827 !important; }
+  
+  /* Ensure gradient colors work */
+  .text-amber-600 { color: #d97706 !important; }
+  .text-amber-700 { color: #b45309 !important; }
+  .text-orange-600 { color: #ea580c !important; }
+  .text-green-600 { color: #16a34a !important; }
+  .text-green-700 { color: #15803d !important; }
+  .text-blue-600 { color: #2563eb !important; }
+  .text-purple-600 { color: #9333ea !important; }
+  
+  /* Ensure border colors work */
+  .border-gray-200 { border-color: #e5e7eb !important; }
+  .border-amber-200 { border-color: #fde68a !important; }
+  .border-green-200 { border-color: #bbf7d0 !important; }
+  
+  /* Ensure background gradients work with fallbacks */
+  .bg-gradient-to-br {
+    background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
+  }
+  
+  /* Fix button colors specifically */
+  .elegant-button {
+    background: linear-gradient(135deg, #f59e0b, #ea580c) !important;
+    color: white !important;
+    border: none !important;
+  }
+  
+  .button-lost {
+    background: linear-gradient(135deg, #f59e0b, #ea580c) !important;
+    color: white !important;
+  }
+  
+  .button-found {
+    background: linear-gradient(135deg, #16a34a, #15803d) !important;
+    color: white !important;
+  }
+  
+  /* Fix card backgrounds */
+  .premium-card {
+    background: rgba(15, 15, 15, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  /* Fix badge colors */
+  .bg-amber-500 { background-color: #f59e0b !important; color: white !important; }
+  .bg-green-500 { background-color: #22c55e !important; color: white !important; }
+  .bg-blue-500 { background-color: #3b82f6 !important; color: white !important; }
+  .bg-purple-500 { background-color: #a855f7 !important; color: white !important; }
+  
+  /* Fix specific gradient text issues */
+  .hero-title .bg-gradient-to-r {
+    background: linear-gradient(90deg, #fbbf24, #f59e0b, #ea580c) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-appearance: none) {
+  .bg-gradient-to-r {
+    background: linear-gradient(90deg, #fbbf24, #ea580c) !important;
+  }
+}
+
+/* Android Chrome specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 1) {
+  .text-transparent {
+    -webkit-text-fill-color: transparent;
+  }
+} 

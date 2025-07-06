@@ -37,8 +37,8 @@ CREATE TABLE public.conversation_participants (
   last_read_at timestamp with time zone DEFAULT now(),
   notification_settings jsonb DEFAULT '{"push": true, "email": false}'::jsonb,
   CONSTRAINT conversation_participants_pkey PRIMARY KEY (id),
-  CONSTRAINT conversation_participants_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id),
-  CONSTRAINT conversation_participants_conversation_id_fkey FOREIGN KEY (conversation_id) REFERENCES public.conversations(id)
+  CONSTRAINT conversation_participants_conversation_id_fkey FOREIGN KEY (conversation_id) REFERENCES public.conversations(id),
+  CONSTRAINT conversation_participants_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id)
 );
 CREATE TABLE public.conversations (
   id uuid NOT NULL DEFAULT uuid_generate_v4(),
@@ -53,9 +53,9 @@ CREATE TABLE public.conversations (
   last_message_preview text,
   last_message_sender_id uuid,
   CONSTRAINT conversations_pkey PRIMARY KEY (id),
-  CONSTRAINT conversations_item_id_fkey FOREIGN KEY (item_id) REFERENCES public.items(id),
+  CONSTRAINT conversations_last_message_sender_id_fkey FOREIGN KEY (last_message_sender_id) REFERENCES public.profiles(id),
   CONSTRAINT conversations_last_message_id_fkey FOREIGN KEY (last_message_id) REFERENCES public.messages(id),
-  CONSTRAINT conversations_last_message_sender_id_fkey FOREIGN KEY (last_message_sender_id) REFERENCES public.profiles(id)
+  CONSTRAINT conversations_item_id_fkey FOREIGN KEY (item_id) REFERENCES public.items(id)
 );
 CREATE TABLE public.conversations_backup (
   id uuid,
@@ -89,8 +89,8 @@ CREATE TABLE public.items (
   title text NOT NULL,
   description text NOT NULL,
   item_type text NOT NULL CHECK (item_type = ANY (ARRAY['lost'::text, 'found'::text])),
-  category_id uuid,
-  location_id uuid,
+  category text,
+  location text,
   specific_location text,
   date_lost_found date NOT NULL,
   time_lost_found time without time zone,
@@ -110,9 +110,7 @@ CREATE TABLE public.items (
   created_at timestamp with time zone DEFAULT now(),
   updated_at timestamp with time zone DEFAULT now(),
   CONSTRAINT items_pkey PRIMARY KEY (id),
-  CONSTRAINT items_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.categories(id),
   CONSTRAINT items_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id),
-  CONSTRAINT items_location_id_fkey FOREIGN KEY (location_id) REFERENCES public.locations(id),
   CONSTRAINT items_resolved_by_fkey FOREIGN KEY (resolved_by) REFERENCES public.profiles(id)
 );
 CREATE TABLE public.locations (
@@ -177,12 +175,12 @@ CREATE TABLE public.messages (
   deleted_at timestamp with time zone,
   metadata jsonb DEFAULT '{}'::jsonb,
   CONSTRAINT messages_pkey PRIMARY KEY (id),
-  CONSTRAINT messages_reply_to_fkey FOREIGN KEY (reply_to) REFERENCES public.messages(id),
-  CONSTRAINT messages_item_id_fkey FOREIGN KEY (item_id) REFERENCES public.items(id),
-  CONSTRAINT messages_receiver_id_fkey FOREIGN KEY (receiver_id) REFERENCES public.profiles(id),
   CONSTRAINT messages_sender_id_fkey FOREIGN KEY (sender_id) REFERENCES public.profiles(id),
-  CONSTRAINT messages_reply_to_id_fkey FOREIGN KEY (reply_to_id) REFERENCES public.messages(id),
-  CONSTRAINT messages_conversation_id_fkey FOREIGN KEY (conversation_id) REFERENCES public.conversations(id)
+  CONSTRAINT messages_receiver_id_fkey FOREIGN KEY (receiver_id) REFERENCES public.profiles(id),
+  CONSTRAINT messages_item_id_fkey FOREIGN KEY (item_id) REFERENCES public.items(id),
+  CONSTRAINT messages_reply_to_fkey FOREIGN KEY (reply_to) REFERENCES public.messages(id),
+  CONSTRAINT messages_conversation_id_fkey FOREIGN KEY (conversation_id) REFERENCES public.conversations(id),
+  CONSTRAINT messages_reply_to_id_fkey FOREIGN KEY (reply_to_id) REFERENCES public.messages(id)
 );
 CREATE TABLE public.notifications (
   id uuid NOT NULL DEFAULT uuid_generate_v4(),
@@ -239,11 +237,11 @@ CREATE TABLE public.reports (
   resolved_at timestamp with time zone,
   created_at timestamp with time zone DEFAULT now(),
   CONSTRAINT reports_pkey PRIMARY KEY (id),
-  CONSTRAINT reports_reported_item_id_fkey FOREIGN KEY (reported_item_id) REFERENCES public.items(id),
-  CONSTRAINT reports_reported_user_id_fkey FOREIGN KEY (reported_user_id) REFERENCES public.profiles(id),
   CONSTRAINT reports_resolved_by_fkey FOREIGN KEY (resolved_by) REFERENCES public.profiles(id),
+  CONSTRAINT reports_reporter_id_fkey FOREIGN KEY (reporter_id) REFERENCES public.profiles(id),
+  CONSTRAINT reports_reported_user_id_fkey FOREIGN KEY (reported_user_id) REFERENCES public.profiles(id),
   CONSTRAINT reports_reported_message_id_fkey FOREIGN KEY (reported_message_id) REFERENCES public.messages(id),
-  CONSTRAINT reports_reporter_id_fkey FOREIGN KEY (reporter_id) REFERENCES public.profiles(id)
+  CONSTRAINT reports_reported_item_id_fkey FOREIGN KEY (reported_item_id) REFERENCES public.items(id)
 );
 CREATE TABLE public.saved_searches (
   id uuid NOT NULL DEFAULT uuid_generate_v4(),
@@ -264,8 +262,8 @@ CREATE TABLE public.typing_indicators (
   is_typing boolean DEFAULT false,
   last_typed_at timestamp with time zone DEFAULT now(),
   CONSTRAINT typing_indicators_pkey PRIMARY KEY (id),
-  CONSTRAINT typing_indicators_conversation_id_fkey FOREIGN KEY (conversation_id) REFERENCES public.conversations(id),
-  CONSTRAINT typing_indicators_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id)
+  CONSTRAINT typing_indicators_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id),
+  CONSTRAINT typing_indicators_conversation_id_fkey FOREIGN KEY (conversation_id) REFERENCES public.conversations(id)
 );
 CREATE TABLE public.user_relationships (
   id uuid NOT NULL DEFAULT uuid_generate_v4(),

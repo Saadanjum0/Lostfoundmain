@@ -5,6 +5,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import mobile color fixes */
+@import './mobile-color-fix.css';
+
 /* Enhanced Design System with Professional Typography and Glassmorphism */
 
 @layer base {
