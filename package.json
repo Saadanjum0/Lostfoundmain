@@ -46,6 +46,7 @@
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.3.0",
+    "gsap": "^3.13.0",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.462.0",
     "next-themes": "^0.3.0",
@@ -64,6 +65,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@rollup/rollup-darwin-x64": "^4.44.2",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
