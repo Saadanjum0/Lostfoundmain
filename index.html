@@ -18,6 +18,55 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@campuslostfound" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <!-- Critical CSS for immediate background application -->
+    <style>
+      html, body, #root {
+        background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+        background-color: #0a0a0a !important;
+        color: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: 100vh !important;
+        transition: none !important;
+        -webkit-backface-visibility: hidden !important;
+        backface-visibility: hidden !important;
+      }
+      
+      /* Prevent any white flash during loading */
+      html::before, body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #0a0a0a !important;
+        z-index: -1;
+        pointer-events: none;
+      }
+      
+      /* Mobile-specific fixes */
+      @media (max-width: 768px) {
+        html {
+          background-attachment: scroll !important;
+          -webkit-text-size-adjust: 100% !important;
+          -webkit-tap-highlight-color: transparent !important;
+        }
+        
+        body {
+          -webkit-overflow-scrolling: touch !important;
+          overflow-x: hidden !important;
+        }
+        
+        /* Hide footer on mobile immediately */
+        footer, .footer, [class*="footer"] {
+          display: none !important;
+          visibility: hidden !important;
+          height: 0 !important;
+        }
+      }
+    </style>
   </head>
 
   <body>

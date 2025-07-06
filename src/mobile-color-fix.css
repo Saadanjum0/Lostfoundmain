@@ -1,147 +1,381 @@
-/* Mobile Color Fix - Add this to ensure colors work on all mobile devices */
+/* Mobile Color Fix - Force dark theme and prevent white flashing */
 
-/* Force color rendering and prevent mobile-specific color issues */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color-rendering: optimizeQuality;
+/* Critical: Prevent FOUC and navigation glitches */
+html, body, #root {
+  background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+  background-color: #0a0a0a !important;
+  color: white !important;
+  transition: none !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
 }
 
-/* Ensure gradients work on all mobile browsers */
-.bg-gradient-to-r,
-.bg-gradient-to-br,
-.bg-gradient-to-bl,
-.bg-clip-text {
-  background-attachment: scroll !important;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Prevent any route transition flashing */
+html::before, body::before, #root::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0a0a0a !important;
+  z-index: -1;
+  pointer-events: none;
 }
 
-/* Mobile-specific gradient fallbacks */
-@supports not (background-clip: text) {
-  .bg-gradient-to-r.from-amber-400.to-orange-500,
-  .bg-gradient-to-r.from-amber-600.to-orange-600 {
-    background: #f59e0b !important;
-    -webkit-background-clip: unset !important;
-    background-clip: unset !important;
-    -webkit-text-fill-color: unset !important;
-    color: #f59e0b !important;
-  }
-}
-
-/* Force color values for mobile */
+/* Mobile-specific viewport fixes */
 @media (max-width: 768px) {
-  /* Force dark background on mobile */
-  body {
+  html {
     background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+    background-color: #0a0a0a !important;
     background-attachment: fixed !important;
     min-height: 100vh !important;
+    min-height: 100dvh !important;
+    -webkit-background-size: cover !important;
+    background-size: cover !important;
   }
-  
-  /* Reduce header height on mobile */
-  header {
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
-  }
-  
-  /* Reduce top margin for mobile content */
-  .min-h-screen {
-    padding-top: 0 !important;
-  }
-  
-  /* Ensure background colors work */
-  .bg-white { background-color: #ffffff !important; }
-  .bg-gray-50 { background-color: #f9fafb !important; }
-  .bg-gray-100 { background-color: #f3f4f6 !important; }
-  .bg-gray-900 { background-color: #111827 !important; }
-  .bg-black { background-color: #000000 !important; }
-  
-  /* Ensure text colors work */
-  .text-white { color: #ffffff !important; }
-  .text-gray-600 { color: #4b5563 !important; }
-  .text-gray-700 { color: #374151 !important; }
-  .text-gray-900 { color: #111827 !important; }
-  
-  /* Ensure gradient colors work */
-  .text-amber-600 { color: #d97706 !important; }
-  .text-amber-700 { color: #b45309 !important; }
-  .text-orange-600 { color: #ea580c !important; }
-  .text-green-600 { color: #16a34a !important; }
-  .text-green-700 { color: #15803d !important; }
-  .text-blue-600 { color: #2563eb !important; }
-  .text-purple-600 { color: #9333ea !important; }
-  
-  /* Ensure border colors work */
-  .border-gray-200 { border-color: #e5e7eb !important; }
-  .border-amber-200 { border-color: #fde68a !important; }
-  .border-green-200 { border-color: #bbf7d0 !important; }
-  
-  /* Ensure background gradients work with fallbacks */
-  .bg-gradient-to-br {
-    background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to)) !important;
-  }
-  
-  /* Fix button colors specifically */
-  .elegant-button {
-    background: linear-gradient(135deg, #f59e0b, #ea580c) !important;
-    color: white !important;
-    border: none !important;
-  }
-  
-  .button-lost {
-    background: linear-gradient(135deg, #f59e0b, #ea580c) !important;
-    color: white !important;
-  }
-  
-  .button-found {
-    background: linear-gradient(135deg, #16a34a, #15803d) !important;
-    color: white !important;
-  }
-  
-  /* Fix card backgrounds */
-  .premium-card {
-    background: rgba(15, 15, 15, 0.9) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  }
-  
-  /* Ensure mobile containers have transparent backgrounds */
-  .container {
+
+  body {
     background: transparent !important;
+    color: white !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    overflow-x: hidden !important;
   }
-  
-  /* Fix any white containers on mobile */
-  .bg-white\/95,
-  .bg-white\/80 {
-    background: rgba(255, 255, 255, 0.1) !important;
+
+  #root {
+    background: transparent !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+  }
+
+  /* Force dark theme on all mobile elements */
+  * {
+    color: white !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Enhanced mobile typography */
+  .hero-title {
+    font-size: 3.5rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+  }
+
+  @media (min-width: 375px) {
+    .hero-title {
+      font-size: 4rem !important;
+    }
+  }
+
+  @media (min-width: 414px) {
+    .hero-title {
+      font-size: 4.5rem !important;
+    }
+  }
+
+  /* Improved mobile spacing */
+  .mobile-hero-section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .space-y-4 > * + * {
+    margin-top: 1.5rem !important;
+  }
+
+  .space-y-6 > * + * {
+    margin-top: 2rem !important;
+  }
+
+  /* Button styling fixes */
+  .elegant-button {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(251, 146, 60, 0.2)) !important;
+    border: 1px solid rgba(245, 158, 11, 0.3) !important;
+    color: white !important;
     backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    font-size: 0.9rem !important;
+    padding: 0.75rem 1.25rem !important;
+    min-height: 44px !important;
   }
-  
-  /* Fix badge colors */
-  .bg-amber-500 { background-color: #f59e0b !important; color: white !important; }
-  .bg-green-500 { background-color: #22c55e !important; color: white !important; }
-  .bg-blue-500 { background-color: #3b82f6 !important; color: white !important; }
-  .bg-purple-500 { background-color: #a855f7 !important; color: white !important; }
-  
-  /* Fix specific gradient text issues */
-  .hero-title .bg-gradient-to-r {
-    background: linear-gradient(90deg, #fbbf24, #f59e0b, #ea580c) !important;
+
+  .elegant-button:hover {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(251, 146, 60, 0.3)) !important;
+    border-color: rgba(245, 158, 11, 0.5) !important;
+    transform: translateY(-2px) !important;
+  }
+
+  /* Premium card styling */
+  .premium-card {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Gradient text fixes for mobile browsers */
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, #fbbf24, #f97316, #fbbf24) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
   }
-}
 
-/* iOS Safari specific fixes */
-@supports (-webkit-appearance: none) {
-  .bg-gradient-to-r {
-    background: linear-gradient(90deg, #fbbf24, #ea580c) !important;
+  /* Fallback for browsers that don't support background-clip */
+  @supports not (-webkit-background-clip: text) {
+    .bg-gradient-to-r {
+      color: #fbbf24 !important;
+      -webkit-text-fill-color: #fbbf24 !important;
+    }
   }
-}
 
-/* Android Chrome specific fixes */
-@media screen and (-webkit-min-device-pixel-ratio: 1) {
-  .text-transparent {
-    -webkit-text-fill-color: transparent;
+  /* Enhanced text sizes for mobile */
+  .text-lg {
+    font-size: 1.125rem !important;
+    line-height: 1.75rem !important;
+  }
+
+  .text-xl {
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
+  }
+
+  /* Text color fixes */
+  .text-white {
+    color: white !important;
+  }
+
+  .text-gray-300 {
+    color: #d1d5db !important;
+  }
+
+  .text-gray-400 {
+    color: #9ca3af !important;
+  }
+
+  .text-gray-600 {
+    color: #6b7280 !important;
+  }
+
+  .text-amber-400 {
+    color: #fbbf24 !important;
+  }
+
+  .text-emerald-400 {
+    color: #34d399 !important;
+  }
+
+  .text-blue-400 {
+    color: #60a5fa !important;
+  }
+
+  /* Header fixes */
+  header {
+    background: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  /* Footer - completely hide on mobile */
+  footer,
+  .footer,
+  [data-testid="footer"],
+  div[class*="footer"],
+  section[class*="footer"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+  }
+
+  /* Container fixes */
+  .container {
+    background: transparent !important;
+  }
+
+  /* Card styling for mobile */
+  .card,
+  [class*="card"] {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+
+  /* Mobile layout improvements */
+  .mobile-hero-section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .mobile-stats {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .mobile-stats .text-lg {
+    font-size: 1.375rem !important;
+  }
+
+  .mobile-stats .text-xl {
+    font-size: 1.5rem !important;
+  }
+
+  .mobile-buttons {
+    gap: 1rem !important;
+    margin-top: 1.5rem !important;
+  }
+
+  /* How It Works cards styling */
+  .how-it-works-card {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-radius: 0.75rem !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .how-it-works-icon {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0.5rem !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .how-it-works-step {
+    background: rgba(245, 158, 11, 0.2) !important;
+    color: #fbbf24 !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 9999px !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+  }
+
+  .how-it-works-title {
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .how-it-works-description {
+    color: #9ca3af !important;
+    font-size: 0.75rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Prevent any white backgrounds */
+  div, section, main, article, aside, nav {
+    background-color: transparent !important;
+  }
+
+  /* Force dark scrollbar on mobile */
+  ::-webkit-scrollbar {
+    width: 8px !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-radius: 4px !important;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  /* Animation fixes */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards !important;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Particle effects */
+  .floating-particles {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    overflow: hidden !important;
+  }
+
+  .particle {
+    position: absolute !important;
+    width: 4px !important;
+    height: 4px !important;
+    background: rgba(245, 158, 11, 0.3) !important;
+    border-radius: 50% !important;
+    animation: float 20s infinite linear !important;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Prevent route transition glitches */
+  [data-testid="route-container"],
+  .route-container,
+  main {
+    background: transparent !important;
+    transition: none !important;
+  }
+
+  /* iOS Safari specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    html {
+      -webkit-text-size-adjust: 100% !important;
+      -webkit-tap-highlight-color: transparent !important;
+    }
+    
+    body {
+      -webkit-overflow-scrolling: touch !important;
+    }
+  }
+
+  /* Android Chrome specific fixes */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    html {
+      background-attachment: scroll !important;
+    }
   }
 } 
