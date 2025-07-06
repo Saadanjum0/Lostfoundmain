@@ -2,100 +2,32 @@ import { useAuth } from '@/contexts/AuthContext';
 import UserDashboard from '@/components/home/UserDashboard';
 import Global3DBackground from '@/components/Global3DBackground';
 import Header from '@/components/layout/Header';
-import { Search, Plus, ArrowRight, Sparkles, MessageCircle, CheckCircle, ArrowDown } from 'lucide-react';
+import { Search, Plus, ArrowRight, Sparkles } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// Mobile How It Works Section
-const MobileHowItWorks = React.memo(() => {
-  const steps = [
-    {
-      id: 1,
-      icon: Plus,
-      title: "Report Item",
-      description: "Create a listing with photos and details",
-      color: "bg-amber-500/20 border-amber-500/30"
-    },
-    {
-      id: 2,
-      icon: Search,
-      title: "Search & Browse",
-      description: "Find items using filters and search",
-      color: "bg-blue-500/20 border-blue-500/30"
-    },
-    {
-      id: 3,
-      icon: MessageCircle,
-      title: "Connect Safely",
-      description: "Message securely to verify ownership",
-      color: "bg-green-500/20 border-green-500/30"
-    },
-    {
-      id: 4,
-      icon: CheckCircle,
-      title: "Happy Reunion",
-      description: "Meet safely and reunite with items",
-      color: "bg-purple-500/20 border-purple-500/30"
-    }
-  ];
-
+// Mobile Footer Component
+const MobileFooter = React.memo(() => {
   return (
-    <section className="py-12 px-4 bg-transparent">
+    <footer className="py-8 px-4 bg-transparent border-t border-white/10">
       <div className="max-w-lg mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-white mb-2 font-['Poppins']">
-            How It Works
-          </h2>
-          <p className="text-gray-400 text-sm font-['Inter']">
-            Simple 4-step process to reunite items
-          </p>
-        </div>
-        
-        <div className="space-y-4">
-          {steps.map((step, index) => (
-            <div key={step.id} className="relative">
-              <div className={`p-4 rounded-xl border ${step.color} bg-black/40 backdrop-blur-sm`}>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                    <step.icon className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-medium text-amber-400 bg-amber-500/20 px-2 py-1 rounded-full">
-                        Step {step.id}
-                      </span>
-                    </div>
-                    <h3 className="text-white font-semibold text-sm mb-1 font-['Poppins']">
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-400 text-xs font-['Inter']">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Arrow connector */}
-              {index < steps.length - 1 && (
-                <div className="flex justify-center py-2">
-                  <ArrowDown className="w-4 h-4 text-gray-600" />
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-8">
+        <div className="flex justify-center items-center gap-8">
           <Link 
-            to="/how-it-works" 
-            className="inline-flex items-center gap-2 text-amber-400 text-sm font-medium hover:text-amber-300 transition-colors"
+            to="/privacy" 
+            className="text-gray-400 hover:text-amber-400 transition-colors text-sm font-['Inter']"
           >
-            Learn More
-            <ArrowRight className="w-4 h-4" />
+            Privacy Policy
+          </Link>
+          <div className="w-px h-4 bg-gray-600"></div>
+          <Link 
+            to="/terms" 
+            className="text-gray-400 hover:text-amber-400 transition-colors text-sm font-['Inter']"
+          >
+            Terms & Conditions
           </Link>
         </div>
       </div>
-    </section>
+    </footer>
   );
 });
 
@@ -117,13 +49,13 @@ const MobileHeroSection = React.memo(() => {
 
   return (
     <section 
-      className="relative min-h-screen flex items-start justify-center px-4 overflow-hidden pt-8 sm:pt-16"
+      className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden"
       style={{
         background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(245, 158, 11, 0.15) 0%, transparent 50%)`
       }}
     >
-      <div className="max-w-4xl mx-auto text-center relative z-10 mt-8 sm:mt-16">
-        <div className="space-y-4 sm:space-y-6 animate-fade-in-up">
+      <div className="max-w-4xl mx-auto text-center relative z-10">
+        <div className="space-y-6 sm:space-y-8 animate-fade-in-up">
           {/* Enhanced Hero Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 premium-card text-white rounded-full animate-fade-in-up [--animation-delay:200ms]">
             <Sparkles className="w-4 h-4 text-amber-400 icon-hover" />
@@ -133,49 +65,55 @@ const MobileHeroSection = React.memo(() => {
           </div>
           
           {/* Hero Title */}
-          <div className="space-y-2 sm:space-y-3">
+          <div className="space-y-3 sm:space-y-4">
             <h1 className="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-tight animate-fade-in-up [--animation-delay:400ms]">
               <span className="bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 bg-clip-text text-transparent">
                 Lost & Found
               </span>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-xl mx-auto leading-relaxed animate-fade-in-up [--animation-delay:600ms] font-['Inter'] font-light px-4">
+            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up [--animation-delay:600ms] font-['Inter'] font-light px-4">
               Your trusted community platform for reuniting lost items with their owners. 
               <span className="text-amber-400 font-medium"> Every item has a story.</span>
             </p>
           </div>
 
-          {/* Report Lost/Found Buttons */}
-          <div className="flex flex-col gap-3 justify-center items-center animate-fade-in-up [--animation-delay:800ms] px-4 mt-4">
-            <Link to="/report/lost" className="elegant-button button-lost px-5 py-2.5 text-sm font-semibold min-w-[160px] group w-full max-w-[200px]">
+          {/* Report Lost/Found Buttons - Fixed Layout */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up [--animation-delay:800ms] px-4 mt-8">
+            <Link 
+              to="/report/lost" 
+              className="elegant-button button-lost px-6 py-3 text-base font-semibold min-w-[200px] group w-full sm:w-auto max-w-[280px] rounded-xl"
+            >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                <Plus className="w-4 h-4 icon-hover" />
+                <Plus className="w-5 h-5 icon-hover" />
                 Report Lost Item
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
-            <Link to="/report/found" className="elegant-button button-found px-5 py-2.5 text-sm font-semibold min-w-[160px] group w-full max-w-[200px]">
+            <Link 
+              to="/report/found" 
+              className="elegant-button button-found px-6 py-3 text-base font-semibold min-w-[200px] group w-full sm:w-auto max-w-[280px] rounded-xl"
+            >
               <span className="relative z-10 flex items-center justify-center gap-2">
-                <Search className="w-4 h-4 icon-hover" />
+                <Search className="w-5 h-5 icon-hover" />
                 I Found Something
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
           </div>
 
-          {/* Simplified Stats - Single Line, Smaller */}
-          <div className="flex justify-center items-center gap-6 sm:gap-8 mt-6 animate-fade-in-up [--animation-delay:1000ms] px-4">
+          {/* Enhanced Stats */}
+          <div className="flex justify-center items-center gap-8 sm:gap-12 mt-8 animate-fade-in-up [--animation-delay:1000ms] px-4">
             <div className="text-center group">
-              <div className="text-lg sm:text-xl font-bold text-amber-400 mb-1 group-hover:scale-110 transition-transform">1,247+</div>
-              <div className="text-gray-400 text-xs font-['Inter']">Items Reunited</div>
+              <div className="text-2xl sm:text-3xl font-bold text-amber-400 mb-2 group-hover:scale-110 transition-transform">1,247+</div>
+              <div className="text-gray-400 text-sm font-['Inter']">Items Reunited</div>
             </div>
             <div className="text-center group">
-              <div className="text-lg sm:text-xl font-bold text-emerald-400 mb-1 group-hover:scale-110 transition-transform">24hr</div>
-              <div className="text-gray-400 text-xs font-['Inter']">Avg Recovery</div>
+              <div className="text-2xl sm:text-3xl font-bold text-emerald-400 mb-2 group-hover:scale-110 transition-transform">24hr</div>
+              <div className="text-gray-400 text-sm font-['Inter']">Avg Recovery</div>
             </div>
             <div className="text-center group">
-              <div className="text-lg sm:text-xl font-bold text-blue-400 mb-1 group-hover:scale-110 transition-transform">98%</div>
-              <div className="text-gray-400 text-xs font-['Inter']">Satisfaction</div>
+              <div className="text-2xl sm:text-3xl font-bold text-blue-400 mb-2 group-hover:scale-110 transition-transform">98%</div>
+              <div className="text-gray-400 text-sm font-['Inter']">Satisfaction</div>
             </div>
           </div>
         </div>
@@ -243,7 +181,7 @@ export default function MobileIndex() {
         {!user ? (
           <>
             <MobileHeroSection />
-            <MobileHowItWorks />
+            <MobileFooter />
           </>
         ) : (
           <div className="container mx-auto px-4 py-8 bg-transparent">
