@@ -24,13 +24,13 @@ const MobileHeroSection = React.memo(() => {
 
   return (
     <section 
-      className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden"
+      className="relative min-h-screen flex items-start justify-center px-4 overflow-hidden pt-8 sm:pt-16"
       style={{
         background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(245, 158, 11, 0.15) 0%, transparent 50%)`
       }}
     >
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <div className="space-y-6 animate-fade-in-up">
+      <div className="max-w-4xl mx-auto text-center relative z-10 mt-8 sm:mt-16">
+        <div className="space-y-4 sm:space-y-6 animate-fade-in-up">
           {/* Enhanced Hero Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 premium-card text-white rounded-full animate-fade-in-up [--animation-delay:200ms]">
             <Sparkles className="w-4 h-4 text-amber-400 icon-hover" />
@@ -40,29 +40,29 @@ const MobileHeroSection = React.memo(() => {
           </div>
           
           {/* Hero Title */}
-          <div className="space-y-3">
-            <h1 className="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-none animate-fade-in-up [--animation-delay:400ms]">
+          <div className="space-y-2 sm:space-y-3">
+            <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight animate-fade-in-up [--animation-delay:400ms]">
               <span className="bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 bg-clip-text text-transparent">
                 Lost & Found
               </span>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed animate-fade-in-up [--animation-delay:600ms] font-['Inter'] font-light px-4">
+            <p className="text-base sm:text-lg text-gray-300 max-w-xl mx-auto leading-relaxed animate-fade-in-up [--animation-delay:600ms] font-['Inter'] font-light px-4">
               Your trusted community platform for reuniting lost items with their owners. 
-              <span className="text-amber-400 font-medium"> Every item has a story. Every reunion brings joy.</span>
+              <span className="text-amber-400 font-medium"> Every item has a story.</span>
             </p>
           </div>
 
           {/* Report Lost/Found Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up [--animation-delay:800ms] px-4">
-            <Link to="/report/lost" className="elegant-button button-lost px-6 py-3 text-base font-semibold min-w-[180px] group">
-              <span className="relative z-10 flex items-center gap-2">
+          <div className="flex flex-col gap-3 justify-center items-center animate-fade-in-up [--animation-delay:800ms] px-4 mt-4">
+            <Link to="/report/lost" className="elegant-button button-lost px-5 py-2.5 text-sm font-semibold min-w-[160px] group w-full max-w-[200px]">
+              <span className="relative z-10 flex items-center justify-center gap-2">
                 <Plus className="w-4 h-4 icon-hover" />
                 Report Lost Item
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
-            <Link to="/report/found" className="elegant-button button-found px-6 py-3 text-base font-semibold min-w-[180px] group">
-              <span className="relative z-10 flex items-center gap-2">
+            <Link to="/report/found" className="elegant-button button-found px-5 py-2.5 text-sm font-semibold min-w-[160px] group w-full max-w-[200px]">
+              <span className="relative z-10 flex items-center justify-center gap-2">
                 <Search className="w-4 h-4 icon-hover" />
                 I Found Something
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
@@ -71,17 +71,17 @@ const MobileHeroSection = React.memo(() => {
           </div>
 
           {/* Simplified Stats - Single Line, Smaller */}
-          <div className="flex justify-center items-center gap-8 mt-12 animate-fade-in-up [--animation-delay:1000ms] px-4">
+          <div className="flex justify-center items-center gap-6 sm:gap-8 mt-6 animate-fade-in-up [--animation-delay:1000ms] px-4">
             <div className="text-center group">
-              <div className="text-xl font-bold text-amber-400 mb-1 group-hover:scale-110 transition-transform">1,247+</div>
+              <div className="text-lg sm:text-xl font-bold text-amber-400 mb-1 group-hover:scale-110 transition-transform">1,247+</div>
               <div className="text-gray-400 text-xs font-['Inter']">Items Reunited</div>
             </div>
             <div className="text-center group">
-              <div className="text-xl font-bold text-emerald-400 mb-1 group-hover:scale-110 transition-transform">24hr</div>
+              <div className="text-lg sm:text-xl font-bold text-emerald-400 mb-1 group-hover:scale-110 transition-transform">24hr</div>
               <div className="text-gray-400 text-xs font-['Inter']">Avg Recovery</div>
             </div>
             <div className="text-center group">
-              <div className="text-xl font-bold text-blue-400 mb-1 group-hover:scale-110 transition-transform">98%</div>
+              <div className="text-lg sm:text-xl font-bold text-blue-400 mb-1 group-hover:scale-110 transition-transform">98%</div>
               <div className="text-gray-400 text-xs font-['Inter']">Satisfaction</div>
             </div>
           </div>
