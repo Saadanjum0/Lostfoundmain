@@ -32,11 +32,19 @@
 
 /* Force color values for mobile */
 @media (max-width: 768px) {
+  /* Force dark background on mobile */
+  body {
+    background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+    background-attachment: fixed !important;
+    min-height: 100vh !important;
+  }
+  
   /* Ensure background colors work */
   .bg-white { background-color: #ffffff !important; }
   .bg-gray-50 { background-color: #f9fafb !important; }
   .bg-gray-100 { background-color: #f3f4f6 !important; }
   .bg-gray-900 { background-color: #111827 !important; }
+  .bg-black { background-color: #000000 !important; }
   
   /* Ensure text colors work */
   .text-white { color: #ffffff !important; }
@@ -84,6 +92,18 @@
   .premium-card {
     background: rgba(15, 15, 15, 0.9) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  /* Ensure mobile containers have transparent backgrounds */
+  .container {
+    background: transparent !important;
+  }
+  
+  /* Fix any white containers on mobile */
+  .bg-white\/95,
+  .bg-white\/80 {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
   }
   
   /* Fix badge colors */

@@ -110,7 +110,10 @@ export default function MobileIndex() {
   const { user, profile } = useAuth();
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative bg-black" style={{ 
+      background: 'radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%)',
+      backgroundAttachment: 'fixed' 
+    }}>
       <Header />
       <Global3DBackground />
       
@@ -118,7 +121,7 @@ export default function MobileIndex() {
         {!user ? (
           <MobileHeroSection />
         ) : (
-          <div className="container mx-auto px-4 py-8">
+          <div className="container mx-auto px-4 py-8 bg-transparent">
             <UserDashboard />
           </div>
         )}
