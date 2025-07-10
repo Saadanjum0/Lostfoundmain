@@ -1,4 +1,13 @@
 /* Mobile Color Fix - Force dark theme and prevent white flashing */
+/* EMERGENCY MOBILE REFRESH PROTECTION - HIGHEST PRIORITY */
+
+/* Critical: Immediate background for any refresh scenario */
+* {
+  background-color: #0a0a0a !important;
+  transition: none !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+}
 
 /* Critical: Prevent FOUC and navigation glitches */
 html, body, #root {
@@ -10,7 +19,7 @@ html, body, #root {
   backface-visibility: hidden !important;
 }
 
-/* Prevent any route transition flashing */
+/* Emergency fallback layers */
 html::before, body::before, #root::before {
   content: '';
   position: fixed;
@@ -19,39 +28,67 @@ html::before, body::before, #root::before {
   right: 0;
   bottom: 0;
   background: #0a0a0a !important;
-  z-index: -1;
+  z-index: -100;
   pointer-events: none;
 }
 
-/* Mobile-specific viewport fixes */
+html::after, body::after, #root::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+  z-index: -99;
+  pointer-events: none;
+}
+
+/* Mobile-specific viewport fixes - AGGRESSIVE */
 @media (max-width: 768px) {
+  /* Override everything immediately */
+  *, *::before, *::after {
+    background-color: transparent !important;
+    color: white !important;
+    transition: none !important;
+  }
+  
   html {
     background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
     background-color: #0a0a0a !important;
-    background-attachment: fixed !important;
+    background-attachment: scroll !important;
     min-height: 100vh !important;
     min-height: 100dvh !important;
     -webkit-background-size: cover !important;
     background-size: cover !important;
+    -webkit-text-size-adjust: 100% !important;
+    -webkit-tap-highlight-color: transparent !important;
+    overflow-x: hidden !important;
   }
 
   body {
-    background: transparent !important;
+    background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+    background-color: #0a0a0a !important;
     color: white !important;
     min-height: 100vh !important;
     min-height: 100dvh !important;
     overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   #root {
     background: transparent !important;
     min-height: 100vh !important;
     min-height: 100dvh !important;
+    color: white !important;
   }
 
-  /* Force dark theme on all mobile elements */
-  * {
+  /* Force dark theme on ALL mobile elements */
+  div, section, main, article, aside, nav, header, footer, span, p, h1, h2, h3, h4, h5, h6, a, button {
     color: white !important;
+    background-color: transparent !important;
     border-color: rgba(255, 255, 255, 0.1) !important;
   }
 
@@ -61,6 +98,10 @@ html::before, body::before, #root::before {
     line-height: 1.1 !important;
     margin-bottom: 1rem !important;
     text-align: center !important;
+    background: linear-gradient(to right, #fbbf24, #f97316, #fbbf24) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
   }
 
   @media (min-width: 375px) {
@@ -79,6 +120,7 @@ html::before, body::before, #root::before {
   .mobile-hero-section {
     padding-top: 1.5rem !important;
     padding-bottom: 2rem !important;
+    background: transparent !important;
   }
 
   .space-y-4 > * + * {
@@ -162,66 +204,72 @@ html::before, body::before, #root::before {
   .text-lg {
     font-size: 1.125rem !important;
     line-height: 1.75rem !important;
+    color: white !important;
   }
 
   .text-xl {
     font-size: 1.25rem !important;
     line-height: 1.75rem !important;
+    color: white !important;
   }
 
   .text-2xl {
     font-size: 1.5rem !important;
     line-height: 2rem !important;
+    color: white !important;
   }
 
   .text-3xl {
     font-size: 1.875rem !important;
     line-height: 2.25rem !important;
-  }
-
-  /* Text color fixes */
-  .text-white {
     color: white !important;
   }
 
-  .text-gray-300 {
+  /* Text color fixes - AGGRESSIVE */
+  .text-white, .text-white * {
+    color: white !important;
+  }
+
+  .text-gray-300, .text-gray-300 * {
     color: #d1d5db !important;
   }
 
-  .text-gray-400 {
+  .text-gray-400, .text-gray-400 * {
     color: #9ca3af !important;
   }
 
-  .text-gray-600 {
+  .text-gray-600, .text-gray-600 * {
     color: #6b7280 !important;
   }
 
-  .text-amber-400 {
+  .text-amber-400, .text-amber-400 * {
     color: #fbbf24 !important;
   }
 
-  .text-emerald-400 {
+  .text-emerald-400, .text-emerald-400 * {
     color: #34d399 !important;
   }
 
-  .text-blue-400 {
+  .text-blue-400, .text-blue-400 * {
     color: #60a5fa !important;
   }
 
   /* Header fixes */
-  header {
+  header, header * {
     background: rgba(0, 0, 0, 0.8) !important;
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     padding: 0.5rem 1rem !important;
+    color: white !important;
   }
 
   /* Mobile Footer Styling */
-  footer {
+  footer, footer * {
     background: transparent !important;
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
     padding: 2rem 1rem !important;
+    color: white !important;
   }
 
   footer a {
@@ -236,17 +284,19 @@ html::before, body::before, #root::before {
   }
 
   /* Container fixes */
-  .container {
+  .container, .container * {
     background: transparent !important;
+    color: white !important;
   }
 
   /* Card styling for mobile */
-  .card,
-  [class*="card"] {
+  .card, .card *,
+  [class*="card"], [class*="card"] * {
     background: rgba(0, 0, 0, 0.4) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
+    color: white !important;
   }
 
   /* Mobile layout improvements */
@@ -262,10 +312,12 @@ html::before, body::before, #root::before {
 
   .mobile-stats .text-2xl {
     font-size: 1.75rem !important;
+    color: white !important;
   }
 
   .mobile-stats .text-3xl {
     font-size: 2rem !important;
+    color: white !important;
   }
 
   .mobile-buttons {
@@ -273,52 +325,10 @@ html::before, body::before, #root::before {
     margin-top: 2rem !important;
   }
 
-  /* How It Works cards styling */
-  .how-it-works-card {
-    background: rgba(0, 0, 0, 0.4) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    border-radius: 0.75rem !important;
-    padding: 1rem !important;
-    margin-bottom: 1rem !important;
-  }
-
-  .how-it-works-icon {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-radius: 0.5rem !important;
-    width: 2.5rem !important;
-    height: 2.5rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-
-  .how-it-works-step {
-    background: rgba(245, 158, 11, 0.2) !important;
-    color: #fbbf24 !important;
-    padding: 0.25rem 0.5rem !important;
-    border-radius: 9999px !important;
-    font-size: 0.75rem !important;
-    font-weight: 500 !important;
-  }
-
-  .how-it-works-title {
-    color: white !important;
-    font-weight: 600 !important;
-    font-size: 0.875rem !important;
-    margin-bottom: 0.25rem !important;
-  }
-
-  .how-it-works-description {
-    color: #9ca3af !important;
-    font-size: 0.75rem !important;
-    line-height: 1.4 !important;
-  }
-
-  /* Prevent any white backgrounds */
-  div, section, main, article, aside, nav {
+  /* Prevent any white backgrounds - NUCLEAR OPTION */
+  div, section, main, article, aside, nav, header, footer, span, p, h1, h2, h3, h4, h5, h6, a, button, input, textarea, select {
     background-color: transparent !important;
+    color: white !important;
   }
 
   /* Force dark scrollbar on mobile */
@@ -361,6 +371,7 @@ html::before, body::before, #root::before {
     height: 100% !important;
     pointer-events: none !important;
     overflow: hidden !important;
+    background: transparent !important;
   }
 
   .particle {
@@ -392,27 +403,63 @@ html::before, body::before, #root::before {
   /* Prevent route transition glitches */
   [data-testid="route-container"],
   .route-container,
-  main {
+  main, main * {
     background: transparent !important;
     transition: none !important;
+    color: white !important;
   }
 
-  /* iOS Safari specific fixes */
+  /* iOS Safari specific fixes - AGGRESSIVE */
   @supports (-webkit-touch-callout: none) {
-    html {
+    html, body, #root, * {
+      background: #0a0a0a !important;
+      background-color: #0a0a0a !important;
       -webkit-text-size-adjust: 100% !important;
       -webkit-tap-highlight-color: transparent !important;
+      color: white !important;
+    }
+    
+    html {
+      background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
     }
     
     body {
+      background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
       -webkit-overflow-scrolling: touch !important;
+    }
+    
+    #root {
+      background: transparent !important;
     }
   }
 
-  /* Android Chrome specific fixes */
+  /* Android Chrome specific fixes - AGGRESSIVE */
   @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    html {
+    html, body, #root, * {
       background-attachment: scroll !important;
+      background: #0a0a0a !important;
+      color: white !important;
+    }
+    
+    html {
+      background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+    }
+    
+    body {
+      background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+    }
+    
+    #root {
+      background: transparent !important;
+    }
+  }
+
+  /* Emergency override for any refresh scenario */
+  @media (orientation: portrait), (orientation: landscape) {
+    html, body, #root {
+      background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+      background-color: #0a0a0a !important;
+      color: white !important;
     }
   }
 } 

@@ -1,3 +1,41 @@
+/* CRITICAL MOBILE BACKGROUND FIXES - MUST BE FIRST */
+/* Emergency background application for mobile refresh scenarios */
+html, body, #root {
+  background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+  background-color: #0a0a0a !important;
+  color: white !important;
+  transition: none !important;
+}
+
+/* Mobile-specific emergency fixes */
+@media (max-width: 768px) {
+  * {
+    background-color: transparent !important;
+    color: white !important;
+  }
+  
+  html {
+    background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+    background-color: #0a0a0a !important;
+    background-attachment: scroll !important;
+    -webkit-text-size-adjust: 100% !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  
+  body {
+    background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+    background-color: #0a0a0a !important;
+    -webkit-overflow-scrolling: touch !important;
+    overflow-x: hidden !important;
+  }
+  
+  #root {
+    background: transparent !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+  }
+}
+
 /* Import Professional Typography - MUST be first */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 

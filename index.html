@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background: #0a0a0a !important; background-color: #0a0a0a !important;">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="color-scheme" content="light" />
-    <meta name="theme-color" content="#f59e0b" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0a0a" />
     <title>Campus Lost & Found - University Platform</title>
     <meta name="description" content="Campus Lost & Found Platform - Helping students report, search, and recover lost items on campus with ease." />
     <meta name="author" content="Campus Lost & Found Team" />
@@ -19,22 +19,52 @@
     <meta name="twitter:site" content="@campuslostfound" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
     
-    <!-- Critical CSS for immediate background application -->
+    <!-- CRITICAL CSS - Loaded immediately to prevent any white flash -->
     <style>
-      html, body, #root {
+      /* IMMEDIATE background application - highest priority */
+      * {
+        background-color: #0a0a0a !important;
+        transition: none !important;
+      }
+      
+      html {
         background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
         background-color: #0a0a0a !important;
         color: white !important;
         margin: 0 !important;
         padding: 0 !important;
         min-height: 100vh !important;
+        min-height: 100dvh !important;
         transition: none !important;
         -webkit-backface-visibility: hidden !important;
         backface-visibility: hidden !important;
+        scroll-behavior: smooth !important;
       }
       
-      /* Prevent any white flash during loading */
-      html::before, body::before {
+      body {
+        background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+        background-color: #0a0a0a !important;
+        color: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: 100vh !important;
+        min-height: 100dvh !important;
+        transition: none !important;
+        -webkit-backface-visibility: hidden !important;
+        backface-visibility: hidden !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+      }
+      
+      #root {
+        background: transparent !important;
+        color: white !important;
+        min-height: 100vh !important;
+        min-height: 100dvh !important;
+        transition: none !important;
+      }
+      
+      /* Prevent any white flash during loading - multiple layers */
+      html::before, body::before, #root::before {
         content: '';
         position: fixed;
         top: 0;
@@ -42,28 +72,136 @@
         right: 0;
         bottom: 0;
         background: #0a0a0a !important;
-        z-index: -1;
+        z-index: -100;
         pointer-events: none;
       }
       
-      /* Mobile-specific fixes */
+      /* Additional insurance layer */
+      html::after, body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
+        z-index: -99;
+        pointer-events: none;
+      }
+      
+      /* Mobile-specific critical fixes */
       @media (max-width: 768px) {
         html {
           background-attachment: scroll !important;
           -webkit-text-size-adjust: 100% !important;
           -webkit-tap-highlight-color: transparent !important;
+          -webkit-overflow-scrolling: touch !important;
         }
         
         body {
           -webkit-overflow-scrolling: touch !important;
           overflow-x: hidden !important;
+          position: relative !important;
+        }
+        
+        /* Force dark theme on all elements immediately */
+        * {
+          color: white !important;
+          background-color: transparent !important;
+        }
+        
+        /* Override any potential white backgrounds */
+        div, section, main, article, aside, nav, header, footer {
+          background-color: transparent !important;
+          color: white !important;
+        }
+      }
+      
+      /* Prevent flash during CSS loading */
+      @media (prefers-color-scheme: light) {
+        html, body, #root {
+          background: #0a0a0a !important;
+          color: white !important;
+        }
+      }
+      
+      /* iOS Safari specific immediate fixes */
+      @supports (-webkit-touch-callout: none) {
+        html, body {
+          background: #0a0a0a !important;
+          background-color: #0a0a0a !important;
+          -webkit-text-size-adjust: 100% !important;
+          -webkit-tap-highlight-color: transparent !important;
         }
       }
     </style>
+    
+    <!-- Immediate JavaScript to force background before any CSS loads -->
+    <script>
+      (function() {
+        // Force immediate background application
+        function forceBackground() {
+          const elements = [document.documentElement, document.body];
+          elements.forEach(function(el) {
+            if (el) {
+              el.style.setProperty('background', 'radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%)', 'important');
+              el.style.setProperty('background-color', '#0a0a0a', 'important');
+              el.style.setProperty('color', 'white', 'important');
+              el.style.setProperty('transition', 'none', 'important');
+            }
+          });
+        }
+        
+        // Apply immediately
+        forceBackground();
+        
+        // Apply on DOM ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', forceBackground);
+        }
+        
+        // Apply when root element is available
+        function checkRoot() {
+          const root = document.getElementById('root');
+          if (root) {
+            root.style.setProperty('background', 'transparent', 'important');
+            root.style.setProperty('color', 'white', 'important');
+            root.style.setProperty('min-height', '100vh', 'important');
+          } else {
+            setTimeout(checkRoot, 10);
+          }
+        }
+        checkRoot();
+        
+        // Mobile refresh detection and prevention
+        let startY = 0;
+        document.addEventListener('touchstart', function(e) {
+          startY = e.touches[0].pageY;
+        });
+        
+        document.addEventListener('touchmove', function(e) {
+          const y = e.touches[0].pageY;
+          if (y > startY && window.pageYOffset === 0) {
+            // This is a pull-to-refresh gesture
+            forceBackground();
+          }
+        });
+        
+        // Force background on visibility change (mobile app switching)
+        document.addEventListener('visibilitychange', function() {
+          if (!document.hidden) {
+            forceBackground();
+          }
+        });
+        
+        // Force background on page show (back navigation)
+        window.addEventListener('pageshow', forceBackground);
+      })();
+    </script>
   </head>
 
-  <body>
-    <div id="root"></div>
+  <body style="background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important; background-color: #0a0a0a !important; color: white !important;">
+    <div id="root" style="background: transparent !important; color: white !important; min-height: 100vh !important;"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
