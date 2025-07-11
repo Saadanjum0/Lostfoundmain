@@ -1,4 +1,14 @@
-/* CRITICAL MOBILE BACKGROUND FIXES - MUST BE FIRST */
+/* Import Professional Typography - MUST be first */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Import mobile color fixes */
+@import './mobile-color-fix.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CRITICAL MOBILE BACKGROUND FIXES */
 /* Emergency background application for mobile refresh scenarios */
 html, body, #root {
   background: radial-gradient(ellipse at center, #1a1a1a 0%, #141414 30%, #0f0f0f 70%, #0a0a0a 100%) !important;
@@ -35,16 +45,6 @@ html, body, #root {
     min-height: 100dvh !important;
   }
 }
-
-/* Import Professional Typography - MUST be first */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Import mobile color fixes */
-@import './mobile-color-fix.css';
 
 /* Enhanced Design System with Professional Typography and Glassmorphism */
 
